@@ -1,2 +1,8 @@
 node_modules/
 .http-proxy
+
+*.txt
+parsedCtx.js
+parsedCallback.js
+ctx.json
+parsed.js
