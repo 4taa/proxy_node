@@ -14,13 +14,6 @@ var ca = require('./ca.js');
 const nodeCommon = require('_http_common');
 const debug = require('debug')('http-proxy');
 
-module.exports = function () {
-	return new Proxy();
-};
-
-module.exports.gunzip = require('./middleware/gunzip');
-module.exports.wildcard = require('./middleware/wildcard');
-
 var Proxy = function () {
 	this.onConnectHandlers = [];
 	this.onRequestHandlers = [];
@@ -34,8 +27,6 @@ var Proxy = function () {
 	this.onResponseEndHandlers = [];
 	this.responseContentPotentiallyModified = false;
 };
-
-module.exports.Proxy = Proxy;
 
 Proxy.prototype.listen = function (options, callback = e => { }) {
 	var self = this;
@@ -838,3 +829,10 @@ Proxy.filterAndCanonizeHeaders = function (originalHeaders) {
 
 	return headers;
 };
+
+module.exports = function () {
+	return new Proxy();
+};
+module.exports.gunzip = require('./middleware/gunzip');
+module.exports.wildcard = require('./middleware/wildcard');
+module.exports.Proxy = Proxy;
